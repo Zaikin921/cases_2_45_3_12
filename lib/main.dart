@@ -5,9 +5,9 @@ import 'package:norm_fu/screens/theme_demo_screen.dart';
 
 import 'screens/listviewscreen.dart';
 import 'screens/navigation_drawer_screen.dart';
-
+import 'package:norm_fu/screens/jsonssscreen.dart';
 
 
 void main() {
-  runApp(const SharedPrefScreen());
+  runApp(const NetworkingScreen());
 }
