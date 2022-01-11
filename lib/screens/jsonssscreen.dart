@@ -37,7 +37,7 @@ class Post {
       userId: json['userId'],
       id: json['id'],
       title: json['title'],
-      body: '',
+      body: json['body'],
     );
   }
 }
@@ -63,28 +63,62 @@ class _NetworkingScreenState extends State<NetworkingScreen> {
     return MaterialApp(
       title: 'Fetch Data Example',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Fetch Post Example'),
         ),
         body: Center(
-          child: FutureBuilder<Post>(
-            future: futurePost,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data!.title);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
+          child: Column(
+            children: [
+             Row(
+               children: [
+               const SizedBox(width: 100, height: 150,
+               child: Text("Title of Post:"),),
+                 SizedBox(width: 100, height: 150,
+                 child: FutureBuilder<Post>(
+                        future: futurePost,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(snapshot.data!.title);
+                          } else if (snapshot.hasError) {
+                            return Text('${snapshot.error}');
+                          }
+                          // By default, show a loading spinner.
+                          return const CircularProgressIndicator();
+                        },
 
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
+                     ),
+               ),
+                 ],
+               ),
+
+           SizedBox(width: 50, height: 40,),
+           Row(
+            children: [
+            const SizedBox(width: 100, height: 150,
+              child: Text("Body of Post:"),),
+              SizedBox(width: 100, height: 150,
+              child: FutureBuilder<Post>(
+              future: futurePost,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!.body);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+
           ),
+            ),
+          ]),
+          ]
         ),
       ),
-    );
+      ));
+
   }
 }
