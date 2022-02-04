@@ -1,6 +1,6 @@
-# norm_fu
+# Решение кейсов 2.4-2.5, 3.1-3.2
 
-Flutter project for fuel (petrol) calculating
+Flutter курс
 
 ## Getting Started
 
